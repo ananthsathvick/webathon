@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/hello_change', function () {
+Route::get('/hello__p_change', function () {
     return view('welcome');
 });
