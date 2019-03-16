@@ -14,7 +14,3 @@
 Route::get('/hello__p_change', function () {
     return view('welcome');
 });
-
-Route::get('/bell', function () {
-    return ('Hell');
-});
