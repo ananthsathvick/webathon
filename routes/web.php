@@ -11,6 +11,12 @@
 |
 */
 
+ 
+Route::get('/hello', function () {
+    return view('welcome all');
+});
+=======
 Route::get('/hello__p_change', function () {
     return view('welcome');
 });
+
