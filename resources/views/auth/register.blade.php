@@ -39,6 +39,38 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="gender" type="radio" class="{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="male" required {{old('gender') ? 'checked' : ''}} >Male
+                                <input id="gender" type="radio" class="{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="female" required {{(old('gender')=="female") ? 'checked' : ''}}>Female
+                                <input id="gender" type="radio" class="{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="other" required {{(old('gender')=="other") ? 'checked' : ''}}>Other
+
+                                @if ($errors->has('gender'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+
+                                @if ($errors->has('phone'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
