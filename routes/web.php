@@ -12,10 +12,10 @@
 */
 
  
-Route::get('/hello', function () {
-    return view('welcome all');
+Route::get('/geo', function () {
+    return view('geo');
 });
 
-Route::get('/hello__p_change', function () {
+Route::get('/', function () {
     return view('welcome');
 });
