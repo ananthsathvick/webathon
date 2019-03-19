@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -26,5 +27,10 @@ class HomeController extends Controller
         return view('home');
     }
 
-    
+    public function feed()
+    {
+        $user = Auth::user();
+        return view('feed');
+
+    }
 }
