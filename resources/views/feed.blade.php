@@ -10,11 +10,11 @@
     @csrf
     
     <div class="form-group">
-  <textarea rows="4" class="form-control" aria-label="With textarea" name="symptom" placeholder="What's happening in your body ?... Let us know"></textarea>
+  <textarea rows="4" class="form-control" aria-label="With textarea" name="symptom" placeholder="What's happening in your body ?... Let us know" id="search"></textarea>
 </div>
 
     <div class="form-group ">
-    <label for="tags" class="sr-only">Password</label>
+    <label for="tags" class="sr-only">Department</label>
     <input type="text" class="form-control" id="tags" placeholder="Department">
     </div>
 
@@ -25,4 +25,36 @@
 </div>
 </div>
 </div>
+
+<script>
+    $( document ).ready(function() {
+      
+         $('#search').on('keyup',function(){
+            $value=$(this).val();
+            $value = $value.split(" ").pop();
+            if(($value == "")||($value.length<=2))
+            {
+              return;
+            }
+            console.log($value);
+              $.ajax({
+                type : 'get',
+                url : '{{URL::to('search')}}',
+                data:{'search':$value},
+                success:function(data){
+                  if($('#tags').val()=='')
+                  {
+                  if(data)
+                  {
+                $('#tags').val(data);  
+                
+                
+                  }
+                }
+              }
+            });
+          });
+      
+        });
+</script>
 @endsection
