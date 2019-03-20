@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -29,8 +31,44 @@ class HomeController extends Controller
 
     public function feed()
     {
-        $user = Auth::user();
-        return view('feed');
+        $patient = Auth::user();
+        $post = DB::table('posts')->where('patient_id',$patient->id)->orderBy('updated_at', 'desc')->get();
+        $comment=array();
+        foreach($post as $pos)
+        {
+            $comment[] = DB::table('comment')->where('post_id',$pos->id)->orderBy('updated_at', 'asc')->get();
+        }
+        $CT = \Carbon\Carbon::now();
+        return view('feed',compact('patient','post','CT','comment'));
+        //return $comment;
 
     }
+
+    public function search(Request $request)
+    {
+        
+            $output="";
+              $products=DB::table('tags')->where('keyword','LIKE', '%'.$request->search.'%' )->get();
+            if (count($products)>0) {
+                // foreach($products as $key) {
+                //     $output .=$key->name." "; 
+                // }
+                return Response(($products[0]->name));
+           }
+    }
+    
+    public function post(Request $request)
+    {
+        if($request->department == '')
+            $request->department = "General";
+        $bool = DB::table('posts')->insert(['department' => $request->department, 'description' => $request->symptom,'patient_id'=>$request->patient_id,'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),]);
+        return redirect('/feed');
+    }
+
+    public function comments(Request $request)
+    {
+        $bool = DB::table('comment')->insert(['comment' => $request->comment, 'post_id' => $request->post_id,'posted_by'=>$request->posted_by,'doc_id'=>$request->doc_id,'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),]);
+        return redirect('/feed');
+    }
+
 }
