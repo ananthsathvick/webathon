@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card ">
                 <div class="card-header font-weight-bold"><h5>{{ucfirst($admin->specification)}} Department </h5></div>
 
                 <div class="card-body">
@@ -22,7 +22,7 @@
         <footer class="blockquote-footer text-center">Thanks for your <cite title="Source Title">Patience</cite></footer>
         @else
         @foreach($post as $index => $pos)
-        <div class="card mt-2">
+        <div class="card mt-2 shadow">
         <div class="card-body">
         <p class="card-title "><span class="font-weight-bold">{{$patient[$index]}}</span> <span class="blockquote-footer"  style="display:initial;"><span class="font-italic">
         @if($CT->diffInMinutes($pos->updated_at)< 60)

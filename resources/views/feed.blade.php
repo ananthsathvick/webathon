@@ -30,7 +30,7 @@
 <footer class="blockquote-footer text-center">Start here by stating your <cite title="Source Title">Symptoms</cite></footer>
 @else
   @foreach($post as $pos)
-  <div class="card mt-2">
+  <div class="card mt-2 shadow">
   <div class="card-body">
     <p class="card-title "><span class="font-weight-bold">{{$patient->name}}</span> <span class="blockquote-footer"  style="display:initial;"><span class="font-italic">{{$pos->department}}</span>
      @if($CT->diffInMinutes($pos->updated_at)< 60)
@@ -52,7 +52,7 @@
       @foreach($commen as $comm)
     @if($comm->post_id == $pos->id)
     <div class="dropdown-divider"></div>
-    <span class="font-weight-bold">{{$comm->posted_by}}</span>-{{$comm->comment}}
+    <div class="alert alert-dark"><span class="font-weight-bold">{{$comm->posted_by}}</span>-{{$comm->comment}}</div>
     @endif
     @endforeach
     @endforeach
