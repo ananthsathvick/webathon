@@ -24,7 +24,7 @@
         @foreach($post as $index => $pos)
         <div class="card mt-2 shadow">
         <div class="card-body">
-        <p class="card-title "><span class="font-weight-bold">{{$patient[$index]}}</span> <span class="blockquote-footer"  style="display:initial;"><span class="font-italic">
+        <p class="card-title "><span class="font-weight-bold "><a href="{{('/detail/'.$patient[$index]->id.'')}}" class="text-dark">{{$patient[$index]->name}}</a></span> <span class="blockquote-footer"  style="display:initial;"><span class="font-italic">
         @if($CT->diffInMinutes($pos->updated_at)< 60)
         {{$CT->diffInMinutes($pos->updated_at)." minutes ago"}}
         @elseif($CT->diffInHours($pos->updated_at)< 24)

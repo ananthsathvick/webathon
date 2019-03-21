@@ -32,7 +32,7 @@ class AdminController extends Controller
         $comment = array();
         foreach($post as $pos)
         {
-            $temp = DB::table('users')->where('id',$pos->patient_id)->orderBy('updated_at', 'desc')->value('name');
+            $temp = DB::table('users')->where('id',$pos->patient_id)->orderBy('updated_at', 'desc')->first();
             $patient[] = $temp; 
             $comment[] = DB::table('comment')->where('post_id',$pos->id)->orderBy('updated_at', 'asc')->get();
         
@@ -70,5 +70,13 @@ class AdminController extends Controller
     return redirect('/admin');
 }
 
+public function detail($id)
+{
+        $user = DB::table('users')->where('id',$id)->first();
+        $blood_test = DB::table('blood_test')->where('pat_id',$id)->orderBy('id', 'asc')->get();
+        $all_res = array("blood_test"=>$blood_test);
+    return view('details',compact('user','all_res'));
+   //return $id;
+}
    
 }

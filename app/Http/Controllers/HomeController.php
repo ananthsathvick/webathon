@@ -26,7 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $patient = Auth::user();
+        //$all_res = array();
+        $blood_test = DB::table('blood_test')->where('pat_id',$patient->id)->orderBy('id', 'asc')->get();
+        $all_res = array("blood_test"=>$blood_test);
+        return view('home',compact('all_res'));
+       // $blood_test = DB::table('blood_test')->where('pat_id',$patient->id)->orderBy('id', 'asc')->get();
+       //return $all_res;
     }
 
     public function feed()

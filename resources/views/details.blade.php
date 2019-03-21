@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin-app')
 
 @section('content')
 
@@ -21,13 +21,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm">
-                                <h4>Patient Access Number : {{ Auth::user()->id }} </h4>
-                                <h5>Name : {{ Auth::user()->name }} </h5>
-                                <h5>Gender : {{ ucfirst(Auth::user()->gender) }} </h5>
+                                <h4>Patient Access Number : {{$user->id }} </h4>
+                                <h5>Name : {{ $user->name }} </h5>
+                                <h5>Gender : {{ ucfirst($user->gender) }} </h5>
                             </div>
                             <div class="col-sm">
-                                @if((Auth::user()->photo_link)== NULL)
-                                @if((Auth::user()->gender)=="male")
+                                @if(($user->photo_link)== NULL)
+                                @if(($user->gender)=="male")
                                 <img id="pic" src="/img/male_template.png" height="200" width="200" alt="Male Template" class="img-thumbnail rounded float-md-right">
                                 @else
                                 <img id="pic" src="/img/female_template.jpg" height="200" width="200" alt="Image Template" class="img-thumbnail rounded float-md-right">
@@ -43,7 +43,7 @@
                     <div class="accordion" id="accordionExample" class="panel-group">
                         @foreach($all_res as $key => $res)
                         @if(count($res)==0)
-                        @continue;
+                            @continue;
                         @endif
                         <div class="card">
 
@@ -62,12 +62,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($res as $re)
+                                        @foreach($res as $re)
                                             <tr>
                                                 <th scope="row">{{$re->spec}}</th>
                                                 <td><strong></strong>{{$re->value}}</td>
                                             </tr>
-                                            @endforeach
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </section>
@@ -80,50 +80,19 @@
 
 
                     </div>
-                    </div>
-
-                    </div>
-                    <div class="card-deck mt-4">
-                    <!-- <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div> -->
-
-                        <div class="card">
-                            <img src="/img/Medplus_logo.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Order Medicines Online</h5>
-                                <p class="card-text">MedPlus is one of India's leading healthcare companies with an ever-growing number of pharmacy stores, online pharmacy, path labs and optical services.</p>
-                                <p class="card-text"><small class="text-muted">- Trusted Brand Partner</small></p>
-                                <a href="https://www.medplusmart.com/"><button type="button" class="btn btn-secondary btn-lg btn-block">Order Now</button></a>
-                            </div>
-                        </div>
-                        
-                        <!-- <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div> -->
-                    </div>
 
 
 
 
 
 
-
-                
-
-          
+                </div>
 
 
-        </div>
+            </div>
+        
+
+        
     </div>
-    @endsection 
+</div>
+@endsection 

@@ -35,6 +35,7 @@ Route::post('/comments','HomeController@comments')->name('comments');
 
 //Comment
 Route::post('/comment','AdminController@comment')->name('comment');
+Route::get('/detail/{id}','AdminController@detail')->name('detail');
 
 Route::prefix('admin')->group(function(){
 
