@@ -77,4 +77,22 @@ class HomeController extends Controller
         return redirect('/feed');
     }
 
+    public function ambi(Request $request)
+    {
+        $pat_no=DB::table('admins')->where('specification','ambulance')->value('phone');
+
+        $fields = array(
+            "sender_id" => "FSTSMS",
+            "message" => "There's an emergency, please reach out as soon as possible. Location: ".$request->search." Phone:".$request->phone."",
+            "language" => "english",
+            "route" => "p",
+            "numbers" => $pat_no,
+        );
+
+        //event(new DocReplied($fields));//Uncomment
+        
+        return Response("success");
+        //return redirect('/feed');
+    }
+
 }

@@ -31,6 +31,8 @@ Route::get('/feed','HomeController@feed')->name('feed');
 Route::post('/post','HomeController@post')->name('post');
 Route::get('/search','HomeController@search'); //ajax controller
 Route::post('/comments','HomeController@comments')->name('comments');
+Route::get('/ambi','HomeController@ambi')->name('ambi');
+
 
 
 //Comment

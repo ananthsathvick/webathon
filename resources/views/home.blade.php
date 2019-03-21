@@ -80,38 +80,62 @@
 
 
                     </div>
+                </div>
+
+            </div>
+
+            @if( Session::has("success") )
+            <div class="alert alert-success alert-block" role="alert">
+                <button class="close" data-dismiss="alert"></button>
+                {{ Session::get("success") }}
+            </div>
+            @endif
+
+
+            @if( Session::has("error") )
+            <div class="alert alert-danger alert-block" role="alert">
+                <button class="close" data-dismiss="alert"></button>
+                {{ Session::get("error") }}
+            </div>
+            @endif
+            <div class="flash-message "></div>
+
+
+
+            <div class="card-deck mt-4">
+
+                <div class="card">
+                    <img src="/img/ambulance.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Call Ambulance</h5>
+                        <p class="card-text"><strong>Emergency ??</strong></p>
+                        <p>Don't need to worry...! Call ambulance to your location with just one click.</p>
+                        <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="getLocation()">Call Now</button>
                     </div>
+                </div>
 
+                <div class="card">
+                    <img src="" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Online Booking of Appointment</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
-                    <div class="card-deck mt-4">
-                    <!-- <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div> -->
+                </div>
 
-                        <div class="card">
-                            <img src="/img/Medplus_logo.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Order Medicines Online</h5>
-                                <p class="card-text">MedPlus is one of India's leading healthcare companies with an ever-growing number of pharmacy stores, online pharmacy, path labs and optical services.</p>
-                                <p class="card-text"><small class="text-muted">- Trusted Brand Partner</small></p>
-                                <a href="https://www.medplusmart.com/"><button type="button" class="btn btn-secondary btn-lg btn-block">Order Now</button></a>
-                            </div>
-                        </div>
-                        
-                        <!-- <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            </div>
-                        </div> -->
+
+                <div class="card">
+                    <img src="/img/Medplus_logo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Order Medicines Online</h5>
+                        <p class="card-text">MedPlus is one of India's leading healthcare companies with an ever-growing number of pharmacy stores.</p>
+                        <p class="card-text"><small class="text-muted">- Trusted Brand Partner</small></p>
+                        <a href="https://www.medplusmart.com/"><button type="button" class="btn btn-secondary btn-lg btn-block">Order Now</button></a>
                     </div>
+                </div>
+
+
+            </div>
 
 
 
@@ -119,11 +143,62 @@
 
 
 
-                
 
-          
+
+
 
 
         </div>
     </div>
+
+    <script>
+        //var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            //x.innerHTML = "Latitude: " + position.coords.latitude + 
+            //"<br>Longitude: " + position.coords.longitude;
+            $val = "http://maps.google.com/?q=" + position.coords.latitude + "," + position.coords.longitude;
+            $.ajax({
+                type: 'get',
+                url: '{{URL::to('ambi')}}',
+                data: {
+                    'search': $val,'phone': {{Auth::user()->phone}},
+                },
+                success: function(data) {
+
+
+                    console.log(data);
+                    if (data == "success") {
+                        $('div.flash-message').addClass("mt-2 alert alert-success text-center font-weight-bold");
+                        $('div.flash-message').html("Ambulance will arrive soon...");
+                        setTimeout(
+                        function() 
+                        {
+                            $('div.flash-message').hide();
+
+                            //do something special
+                        }, 3000);
+
+
+
+
+                    }
+
+
+
+
+                }
+            });
+            //   console.log("http://maps.google.com/?q="+position.coords.latitude + 
+            //   "," + position.coords.longitude);
+        }
+    </script>
     @endsection 
