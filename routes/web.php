@@ -17,7 +17,11 @@ Route::get('/geo', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
+});
+
+Route::get('/site', function () {
+    return view('site');
 });
 
 Auth::routes();

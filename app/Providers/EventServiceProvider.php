@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-
+use App\Events\DocReplied;
+use App\Listeners\SendNoti;
+//it is stil showing aegle only in title bar ,to me
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +19,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        DocReplied::class => [
+            SendNoti::class,
         ],
     ];
 
