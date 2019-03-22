@@ -45,7 +45,7 @@
     {{$CT->diffInYears($pos->updated_at)." months ago"}}
     
     @endif </span> </p>
-    {{$pos->description}}
+    {!!$pos->description!!}
     <div class="dropdown-divider"></div>
     <i class="fas fa-comment-alt">Comment</i>
     @foreach($comment as $commen)
@@ -92,13 +92,13 @@
                     'search': $value
                 },
                 success: function(data) {
-                    if ($('#tags').val() == '') {
+                   
                         if (data) {
                             $('#tags').val(data);
 
 
                         }
-                    }
+                    
                 }
             });
         });

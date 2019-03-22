@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><strong>Welcome to the Hospitals</strong></div>
+                <div class="card-header"><strong>Welcome to Blue Cross</strong></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -47,12 +47,12 @@
                         @endif
                         <div class="card">
 
-                            <button class="card-header btn panel-heading collapsed" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <button class="card-header btn panel-heading collapsed" id="headingOne" data-toggle="collapse" data-target="{{'#'.$key}}" aria-expanded="false" aria-controls="collapseOne">
                                 <h5 class="text-left mb-0">{{ucfirst(str_replace("_"," ",$key))}}</h5>
                             </button>
 
 
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="">
+                            <div id="{{$key}}" class="collapse" aria-labelledby="headingOne" data-parent="">
                                 <section class="compcontent">
                                     <table class="table table-striped card-body">
                                         <thead>
@@ -114,23 +114,23 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <!-- <div class="card">
                     <img src="" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Online Booking of Appointment</h5>
                         <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="card">
                     <img src="/img/Medplus_logo.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Order Medicines Online</h5>
-                        <p class="card-text">MedPlus is one of India's leading healthcare companies with an ever-growing number of pharmacy stores.</p>
-                        <p class="card-text"><small class="text-muted">- Trusted Brand Partner</small></p>
-                        <a href="https://www.medplusmart.com/"><button type="button" class="btn btn-secondary btn-lg btn-block">Order Now</button></a>
+                        <p class="card-text m-sm-3 ">MedPlus is one of India's leading healthcare companies with an ever-growing number of pharmacy stores, online pharmacy, path labs and optical services.</p>
+                        <p class="card-text"><small class="text-muted ">- Trusted Brand Partner</small></p>
+                        <a href="https://www.medplusmart.com/"><button type="button" class="btn btn-secondary btn-lg btn-block mt-sm-5">Order Now</button></a>
                     </div>
                 </div>
 
@@ -170,7 +170,7 @@
                 type: 'get',
                 url: '{{URL::to('ambi')}}',
                 data: {
-                    'search': $val,'phone': {{Auth::user()->phone}},
+                    'search': $val,'phone': {{Auth::user()->phone}},'pat_id': {{Auth::user()->id}},
                 },
                 success: function(data) {
 

@@ -37,7 +37,7 @@
         {{$CT->diffInYears($pos->updated_at)." months ago"}}
         @endif
         </span> </p>
-        {{$pos->description}}
+        {!!$pos->description!!}
         <div class="dropdown-divider"></div>
         <i class="fas fa-comment-alt mb-2"> Comment</i>
         @foreach($comment as $commen)

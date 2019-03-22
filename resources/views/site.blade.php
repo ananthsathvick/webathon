@@ -444,7 +444,7 @@ width:100%;
   position:absolute;
   top:50%;
   left:50%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,0%);
   width:60%;
 }
 .st0{fill:none;}
@@ -498,18 +498,8 @@ footer{
             <span class="bars"  onclick="openNav(x)">&nbsp &#9776; </span>
                 <div class="top-right links nav-content">
                     @auth
-                    <div class="pcnav">
-                    <a href="#about" >About</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                    </div>
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                    <div class="pcnav top-right links nav-content">
-                    <a href="#about" >About</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                    </div>
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
@@ -518,11 +508,6 @@ footer{
                         @endif
                     @endauth
                     @auth('admin')
-                    <div class="pcnav top-right links nav-content">
-                    <a href="#about" >About</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                    </div>
                         <a href="{{ url('/admin') }}">Home</a>
                         @else
                         <a href="{{ route('admin.login') }}">Dr.Login</a>

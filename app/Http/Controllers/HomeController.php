@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\DocReplied;
+
 
 
 class HomeController extends Controller
@@ -29,7 +31,9 @@ class HomeController extends Controller
         $patient = Auth::user();
         //$all_res = array();
         $blood_test = DB::table('blood_test')->where('pat_id',$patient->id)->orderBy('id', 'asc')->get();
-        $all_res = array("blood_test"=>$blood_test);
+        $all_res = array("blood_report"=>$blood_test);
+        $thy = DB::table('throid_test')->where('pat_id',$patient->id)->orderBy('id', 'asc')->get();
+        $all_res["thyroid_report"] = $thy;
         return view('home',compact('all_res'));
        // $blood_test = DB::table('blood_test')->where('pat_id',$patient->id)->orderBy('id', 'asc')->get();
        //return $all_res;
@@ -81,6 +85,7 @@ class HomeController extends Controller
     {
         $pat_no=DB::table('admins')->where('specification','ambulance')->value('phone');
 
+
         $fields = array(
             "sender_id" => "FSTSMS",
             "message" => "There's an emergency, please reach out as soon as possible. Location: ".$request->search." Phone:".$request->phone."",
@@ -89,7 +94,9 @@ class HomeController extends Controller
             "numbers" => $pat_no,
         );
 
-        //event(new DocReplied($fields));//Uncomment
+        event(new DocReplied($fields));//Uncomment
+
+        $bool = DB::table('posts')->insert(['department' => 'ambulance', 'description' => "Location: <a href='".$request->search."'> Location</a> Phone:".$request->phone ,'patient_id'=>$request->pat_id,'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now(),]);
         
         return Response("success");
         //return redirect('/feed');
